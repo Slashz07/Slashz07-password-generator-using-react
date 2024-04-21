@@ -1,4 +1,4 @@
-import { useState,useCallback } from 'react'
+import { useState,useCallback,useEffect } from 'react'
 
 
 function App() {
@@ -19,7 +19,10 @@ function App() {
     setPassword(pass)
   },[length,number,char,setPassword])
   
-
+  useEffect(() => {
+    passwordGenerator()
+  },[length,number,char,passwordGenerator])
+  
   return (
     <>
       <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 text-orange-500 bg-gray-800' >
@@ -38,6 +41,28 @@ function App() {
               onChange={(e)=>{setLength(e.target.value)}}
             />
             <label>Length: {length}</label>
+          </div>
+          <div className='flex text-center gap-x-1' >
+            <input
+              type="checkbox"
+              id='getNum'
+              defaultChecked={number}
+              onChange={() => {
+                setNumber((prev)=>!prev)
+              }}
+            />
+            <label htmlFor="getNum">Number</label>
+          </div>
+          <div className='flex text-center gap-x-1' >
+            <input
+              type="checkbox"
+              id='getChar'
+              defaultChecked={char}
+              onChange={() => {
+                setChar((prev)=>!prev)
+              }}
+            />
+            <label htmlFor="getChar">Characters</label>
           </div>
         </div>
    </div>
